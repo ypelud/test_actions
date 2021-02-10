@@ -20,15 +20,15 @@ jobs:
     - name: Set TAG master
       run: |-
         echo "TAG_NAME='latest'" >> $GITHUB_ENV
-      if: env.SOURCE_BRANCH == "master"
+      if: env.SOURCE_BRANCH == 'master'
     - name: Set TAG "SOURCE_BRANCH=${GITHUB_REF#refs/heads/}"
       run: |-
         echo "TAG_NAME=${{env.SOURCE_TAG}}" >> $GITHUB_ENV
-      if: env.SOURCE_BRANCH != "master" && env.SOURCE_TAG == ""
+      if: env.SOURCE_BRANCH != 'master' && env.SOURCE_TAG == ''
     - name: Set TAG "SOURCE_BRANCH=${GITHUB_REF#refs/heads/}"
       run: |-
         echo "TAG_NAME=${{env.SOURCE_BRANCH}}" >> $GITHUB_ENV
-      if: env.SOURCE_BRANCH != "master" && env.SOURCE_TAG != ""
+      if: env.SOURCE_BRANCH != 'master' && env.SOURCE_TAG != ''
 
 
     - name: Build
