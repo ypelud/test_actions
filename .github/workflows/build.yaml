@@ -24,11 +24,11 @@ jobs:
     - name: Set TAG version
       run: |-
         echo "TAG_NAME=${{env.SOURCE_TAG}}" >> $GITHUB_ENV
-      if: env.SOURCE_BRANCH != 'master' && contains($GITHUB_REF, 'ref/heads')
+      if: env.SOURCE_BRANCH != 'master' && contains(github.ref , 'ref/heads')
     - name: Set TAG branch
       run: |-
         echo "TAG_NAME=${{env.SOURCE_BRANCH}}" >> $GITHUB_ENV
-      if: env.SOURCE_BRANCH != 'master' && !contains($GITHUB_REF, 'ref/heads')
+      if: env.SOURCE_BRANCH != 'master' && !contains(github.ref , 'ref/heads')
 
 
     - name: Build
