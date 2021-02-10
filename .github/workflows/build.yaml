@@ -19,7 +19,7 @@ jobs:
 
     - name: Set TAG master
       run: |-
-        echo "TAG_NAME=latest" >> $GITHUB_ENV
+        echo "TAG_NAME='latest'" >> $GITHUB_ENV
       if: env.SOURCE_BRANCH == "master"
     - name: Set TAG "SOURCE_BRANCH=${GITHUB_REF#refs/heads/}"
       run: |-
