@@ -19,16 +19,17 @@ jobs:
 
     - name: Set TAG master
       run: |-
+        echo "master"
         echo "TAG_NAME='latest'" >> $GITHUB_ENV
       if: env.SOURCE_BRANCH == 'master'
     - name: Set TAG version
       run: |-
         echo "TAG_NAME=${{env.SOURCE_TAG}}" >> $GITHUB_ENV
-      if: env.SOURCE_BRANCH != 'master' && contains(github.ref , 'ref/heads')
+      if: env.SOURCE_BRANCH != 'master' && contains(env.SOURCE_BRANCH , 'refs/tags')
     - name: Set TAG branch
       run: |-
         echo "TAG_NAME=${{env.SOURCE_BRANCH}}" >> $GITHUB_ENV
-      if: env.SOURCE_BRANCH != 'master' && !contains(github.ref , 'ref/heads')
+      if: env.SOURCE_BRANCH != 'master' && !contains(env.SOURCE_BRANCH , 'refs/tags')
 
 
     - name: Build
