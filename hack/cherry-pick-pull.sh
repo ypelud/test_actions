@@ -230,21 +230,21 @@ if [[ -n "${DRY_RUN}" ]]; then
   exit 0
 fi
 
-if git remote -v | grep ^"${FORK_REMOTE}" | grep "${MAIN_REPO_ORG}/${MAIN_REPO_NAME}.git"; then
-  echo "!!! You have ${FORK_REMOTE} configured as your ${MAIN_REPO_ORG}/${MAIN_REPO_NAME}.git"
-  echo "This isn't normal. Leaving you with push instructions:"
-  echo
-  echo "+++ First manually push the branch this script created:"
-  echo
-  echo "  git push REMOTE ${NEWBRANCHUNIQ}:${NEWBRANCH}"
-  echo
-  echo "where REMOTE is your personal fork (maybe ${UPSTREAM_REMOTE}? Consider swapping those.)."
-  echo "OR consider setting UPSTREAM_REMOTE and FORK_REMOTE to different values."
-  echo
-  make-a-pr
-  cleanbranch=""
-  exit 0
-fi
+# if git remote -v | grep ^"${FORK_REMOTE}" | grep "${MAIN_REPO_ORG}/${MAIN_REPO_NAME}.git"; then
+#   echo "!!! You have ${FORK_REMOTE} configured as your ${MAIN_REPO_ORG}/${MAIN_REPO_NAME}.git"
+#   echo "This isn't normal. Leaving you with push instructions:"
+#   echo
+#   echo "+++ First manually push the branch this script created:"
+#   echo
+#   echo "  git push REMOTE ${NEWBRANCHUNIQ}:${NEWBRANCH}"
+#   echo
+#   echo "where REMOTE is your personal fork (maybe ${UPSTREAM_REMOTE}? Consider swapping those.)."
+#   echo "OR consider setting UPSTREAM_REMOTE and FORK_REMOTE to different values."
+#   echo
+#   make-a-pr
+#   cleanbranch=""
+#   exit 0
+# fi
 
 echo
 echo "+++ I'm about to do the following to push to GitHub (and I'm assuming ${FORK_REMOTE} is your personal fork):"
