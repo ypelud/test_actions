@@ -185,7 +185,7 @@ for pull in "${PULLS[@]}"; do
       echo
       if ! [[ "${REPLY}" =~ ^[yY]$ ]]; then
         echo "Aborting." >&2
-        exit 1
+        exit 1gb
       fi
     done
 
@@ -203,6 +203,9 @@ for pull in "${PULLS[@]}"; do
   rm -f "/tmp/${pull}.patch"
 done
 gitamcleanup=false
+
+echo "test"
+read test
 
 # Re-generate docs (if needed)
 if [[ -n "${REGENERATE_DOCS}" ]]; then
