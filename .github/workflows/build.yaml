@@ -47,9 +47,9 @@ jobs:
 
     - name: Test runs
       run: |-
-        echo ${{env.SOURCE_BRANCH}} > build.txt
-        echo ${{env.SOURCE_TAG}} >> build.txt
-        echo ${{env.TAG_NAME}} >> build.txt
+        echo ${{env.SOURCE_BRANCH}} > build/test.txt
+        echo ${{env.SOURCE_TAG}} >> build/test.txt
+        echo ${{env.TAG_NAME}} >> build/test.txt
 
 
     - name: build to build
