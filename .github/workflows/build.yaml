@@ -45,6 +45,23 @@ jobs:
         token: ${{ secrets.MYPAT }} # `GitHub_PAT` is a secret that contains your PAT
         path: build
 
+    - name: Test runs
+      run: |-
+        echo ${{env.SOURCE_BRANCH}} > build.txt
+        echo ${{env.SOURCE_TAG}} >> build.txt
+        echo ${{env.TAG_NAME}} >> build.txt
+
+
+    - name: build to build
+      run: |-
+        cd build
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@adeo.com"
+        git add .
+        git diff-index --quiet HEAD || git commit -m "build $GITHUB_REF"
+        git push
+
+
     - name: liste
       run: |-
         ls -la
