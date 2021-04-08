@@ -57,9 +57,10 @@ jobs:
         cd build
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@adeo.com"
+        git checkout -b ${{env.SOURCE_BRANCH}} --track origin/${{env.SOURCE_BRANCH}} || git checkout -b ${{env.SOURCE_BRANCH}}
         git add .
         git diff-index --quiet HEAD || git commit -m "build $GITHUB_REF"
-        git push
+        git push -u origin ${{env.SOURCE_BRANCH}}
 
 
     - name: liste
