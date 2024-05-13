@@ -36,3 +36,10 @@ jobs:
             type=ref,event=branch
             type=ref,event=pr
             type=match,pattern=${{ matrix.image }}/v(.*),group=1
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
