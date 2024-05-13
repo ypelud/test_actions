@@ -3,13 +3,13 @@ name: test-meta
 on:
   push:
     branches:
-      - 'main'
+      - 'master'
     tags:
       - 'test1/v*'
       - 'test2/v*'      
   pull_request:
     branches:
-      - 'main'
+      - 'master'
 
   # schedule:
   #   - cron: "0 0 * * 1" # each monday at 0:00
