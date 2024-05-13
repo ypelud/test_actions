@@ -1,3 +1,12 @@
-FROM alpine:3.14
+ARG ALPINE_VERSION=3.14
+
+FROM alpine:$ALPINE_VERSION
+
+ARG SIMPLESAML_VERSION=1.19.9
+ARG COMPOSER_VERSION=1
+
+RUN echo $SIMPLESAML_VERSION > test.log
+RUN echo $COMPOSER_VERSION >> test.log
+
 RUN apk add --no-cache mysql-client
 ENTRYPOINT ["mysql"]
