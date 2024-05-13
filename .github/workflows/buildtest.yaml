@@ -1,0 +1,38 @@
+name: test-meta
+
+on:
+  push:
+    branches:
+      - 'main'
+    tags:
+      - 'test1/v*'
+      - 'test2/v*'      
+  pull_request:
+    branches:
+      - 'main'
+
+  # schedule:
+  #   - cron: "0 0 * * 1" # each monday at 0:00
+
+jobs:
+  build-test:
+    runs-on:  ubuntu-latest
+    strategy:
+      matrix:
+        image: ["test1", "test2"]
+    outputs:
+      tags: ${{ steps.deta.outputs.tags }}   
+      labels: ${{ steps.deta.outputs.labels }}   
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            europe-docker.pkg.dev/hr-shared-gar-prod-0i8s/hr-docker/{{ matrix.image }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=match,pattern={{ matrix.image }}/v(.*),group=1
