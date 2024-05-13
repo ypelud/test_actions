@@ -31,8 +31,8 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            europe-docker.pkg.dev/hr-shared-gar-prod-0i8s/hr-docker/{{ matrix.image }}
+            europe-docker.pkg.dev/hr-shared-gar-prod-0i8s/hr-docker/${{ matrix.image }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
-            type=match,pattern={{ matrix.image }}/v(.*),group=1
+            type=match,pattern=${{ matrix.image }}/v(.*),group=1
