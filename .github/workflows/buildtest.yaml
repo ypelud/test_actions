@@ -48,4 +48,4 @@ jobs:
           push: false
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          build-args: --build-arg ALPINE-VERSION=${{ matrix.base }} --build-arg SIMPLESAML_VERSION=${{ matrix.simplesaml }} --build-arg COMPOSER_VERSION=${{ matrix.composer }}
+          build-args: ALPINE-VERSION=${{ matrix.base }} SIMPLESAML_VERSION=${{ matrix.simplesaml }} COMPOSER_VERSION=${{ matrix.composer }}
