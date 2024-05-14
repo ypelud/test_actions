@@ -5,8 +5,7 @@ on:
     branches:
       - 'master'
     tags:
-      - 'test1/v*'
-      - 'test2/v*'      
+      - 'php-apache/v*'
   pull_request:
     branches:
       - 'master'
@@ -40,7 +39,7 @@ jobs:
           tags: |
             type=ref,event=branch
             type=ref,event=pr
-            type=match,pattern=saml-${{ matrix.simplesaml }}/v(.*),group=1
+            type=match,pattern=php-apache/v(.*),group=1
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
