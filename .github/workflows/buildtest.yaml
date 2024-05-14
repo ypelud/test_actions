@@ -5,8 +5,7 @@ on:
     branches:
       - 'master'
     tags:
-      - 'test1/v*'
-      - 'test2/v*'      
+      - 'php-apache/v*'
   pull_request:
     branches:
       - 'master'
@@ -19,10 +18,12 @@ jobs:
     runs-on:  ubuntu-latest
     strategy:
       matrix:
-        image: ["test1", "test2"]
+        base: ["3.14"]
+        simplesaml: ["1.1.19", "2.0.11"]
+        composer: ["1", "2"]
     outputs:
-      tags: ${{ steps.deta.outputs.tags }}   
-      labels: ${{ steps.deta.outputs.labels }}   
+      tags: ${{ steps.meta.outputs.tags }}   
+      labels: ${{ steps.meta.outputs.labels }}   
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,12 +31,15 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
+          flavor: |
+            latest=auto
+            suffix=-ssaml-${{ matrix.simplesaml }}-cpsr-${{ matrix.composer }}-alp-${{ matrix.base }},onlatest=true
           images: |
-            europe-docker.pkg.dev/hr-shared-gar-prod-0i8s/hr-docker/${{ matrix.image }}
+            europe-docker.pkg.dev/hr-shared-gar-prod-0i8s/hr-docker/php
           tags: |
             type=ref,event=branch
             type=ref,event=pr
-            type=match,pattern=${{ matrix.image }}/v(.*),group=1
+            type=match,pattern=php-apache/v(.*),group=1
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
@@ -43,3 +47,7 @@ jobs:
           push: false
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            ALPINE-VERSION=${{ matrix.base }}
+            SIMPLESAML_VERSION=${{ matrix.simplesaml }}
+            COMPOSER_VERSION=${{ matrix.composer }}
