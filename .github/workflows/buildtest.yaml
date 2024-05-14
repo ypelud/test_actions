@@ -34,13 +34,13 @@ jobs:
         with:
           flavor: |
             latest=auto
-            
+            suffix=-ssaml-${{ matrix.simplesaml }}-cpsr-${{ matrix.composer }}-alp-${{ matrix.base }}
           images: |
             europe-docker.pkg.dev/hr-shared-gar-prod-0i8s/hr-docker/php
           tags: |
             type=ref,event=branch
-            type=ref,event=pr,suffix=-ssaml-${{ matrix.simplesaml }}-cpsr-${{ matrix.composer }}-alp-${{ matrix.base }}
-            type=match,pattern=saml-${{ matrix.simplesaml }}/v(.*),group=1,,suffix=-ssaml-${{ matrix.simplesaml }}-cpsr-${{ matrix.composer }}-alp-${{ matrix.base }}
+            type=ref,event=pr
+            type=match,pattern=saml-${{ matrix.simplesaml }}/v(.*),group=1
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
