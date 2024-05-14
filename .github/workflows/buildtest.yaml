@@ -34,7 +34,7 @@ jobs:
         with:
           flavor: |
             latest=auto
-            suffix=-ssaml-${{ matrix.simplesaml }}-cpsr-${{ matrix.composer }}-alp-${{ matrix.base }}
+            suffix=-ssaml-${{ matrix.simplesaml }}-cpsr-${{ matrix.composer }}-alp-${{ matrix.base }},onlatest=true
           images: |
             europe-docker.pkg.dev/hr-shared-gar-prod-0i8s/hr-docker/php
           tags: |
